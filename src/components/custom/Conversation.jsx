@@ -1,0 +1,52 @@
+import React from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { fetchConversations } from '@/queries/fetching';
+import Highlight from 'react-highlight'
+import Loading from './Loading';
+
+const Conversation = ({loading}) => {
+  const { data: conversations = [], isLoading, error } = useQuery(
+    {
+      queryKey: ['conversations'],
+      queryFn: fetchConversations,
+    }
+  );
+
+  if (isLoading) {
+    return <Loading array={[1,1,1,1,1,1]} />;
+  }
+
+  if (error) {
+    return <div className="text-center">Error fetching conversations: {error.message}</div>;
+  }
+console.log(conversations)
+  return (
+    <div className="w-full max-w-5xl mx-auto p-4">
+      {loading && <Loading array={[1]} />}
+      {conversations.length === 0 ? (
+        <div className="text-center">No conversations found.</div>
+      ) : (
+        conversations.map((qa) => (
+          <div key={qa.id} className="my-4 p-4 border rounded-lg shadow-md">
+            {/* Question Section */}
+            <div className="mb-2">
+              <h3 className="text-lg font-semibold text-gray-700">You asked:</h3>
+              <p className="text-gray-900 font-semibold">{qa.query} ?</p>
+            </div>
+
+            {/* Answer Section */}
+            <div className="mt-2">
+              <h4 className="text-lg font-semibold text-green-600">Bot replied:</h4>
+              <div className='overflow-x-auto'>
+              <Highlight className="text-gray-800 ">{qa.response}</Highlight>
+              </div>
+              <p>{new Date(qa.timestamp).toLocaleString()}</p>
+            </div>
+          </div>
+        ))
+      )}
+    </div>
+  );
+};
+
+export default Conversation;
