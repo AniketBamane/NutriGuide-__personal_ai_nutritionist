@@ -44,3 +44,33 @@ export const fetchConversations = async () => {
     timestamp: doc.data().timestamp,
   }));
 };
+
+
+export const sendQuestion = async (question)=>{
+  try{
+    const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/nutriguide`,{
+      message:question
+    },{
+      withCredentials:true,
+      headers:{
+        "Content-Type":"application/json"
+      }
+    })
+    console.log(response)
+    return response.data
+  }catch(err){
+    console.error(err)
+    throw err
+  }
+}
+
+export const fetchConversationsFromMongoDb = async()=>{
+  try{
+    const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/get-conversations`)
+    console.log(response)
+    return response.data
+  }catch(err){
+    console.error(err)
+    throw err
+  }
+}

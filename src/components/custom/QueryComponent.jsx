@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Input } from '@/components/ui/input';  // Assuming you're using Shadcn UI Input
 import { Button } from '@/components/ui/button'; // Shadcn UI Button
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { storeResponseInFirebase, uploadQuestion } from '@/queries/fetching';
+import { sendQuestion, storeResponseInFirebase, uploadQuestion } from '@/queries/fetching';
 import { LeafyGreen, Loader2 } from 'lucide-react';
 import TypewriterEffect from './TypewriterEffect';
 
@@ -11,11 +11,11 @@ const QueryComponent = ({loading,setLoading}) => {
   const queryClient = useQueryClient()
 
   const { mutateAsync, isLoading ,error,isError } = useMutation({
-    mutationFn:uploadQuestion,
+    mutationFn:sendQuestion,
     onSuccess: async(response) => {
       try{
-        console.log(response,"-----------response----------")
-       await storeResponseInFirebase(query,response)
+        // console.log(response,"-----------response----------")
+      //  await storeResponseInFirebase(query,response)
         queryClient.invalidateQueries(['conversations']); 
       }catch(err){
         console.error(err);
