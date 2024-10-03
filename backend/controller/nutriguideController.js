@@ -23,7 +23,7 @@ async function handleChat(req, res) {
 
   const chatSession = model.startChat({
     generationConfig,
-      history: [
+    history: [
       {
         role: "user",
         parts: [
@@ -46,6 +46,18 @@ async function handleChat(req, res) {
         role: "model",
         parts: [
           {text: "Okay, I understand! Let's start by getting to know you a little better. \n\nCould you please tell me:\n\n1. **Your Name:**\n2. **Your Weight (in kg):**\n3. **Your Height (in cm):**\n4. **Do you have any health conditions or allergies?** \n\nOnce I have this information, I can start creating a personalized plan for you. 😊 \n"},
+        ],
+      },
+      {
+        role: "user",
+        parts: [
+          {text: "don't answer any question which is unrelated to nutritions or nutritionist ,\n"},
+        ],
+      },
+      {
+        role: "model",
+        parts: [
+          {text: "Understood. I'm ready to focus entirely on your nutrition needs! Let's start with some basic information to help me understand your goals and preferences.  Please tell me:\n\n1.  **What are your main nutrition goals?** (For example, lose weight, gain muscle, eat healthier, etc.) \n2.  **Do you have any specific health conditions or dietary restrictions?** (For example, high cholesterol, diabetes, allergies, vegetarianism, etc.)\n3.  **What are your food preferences?** (Do you like to cook? Are you open to trying new foods? What are your favorite cuisines?  Are there any foods you dislike?) \n\nI'll use this information to tailor a personalized nutrition plan that's right for you.  😊 \n"},
         ],
       },
     ],
