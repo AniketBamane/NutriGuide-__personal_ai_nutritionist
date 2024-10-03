@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import {  fetchConversationsFromMongoDb } from '@/queries/fetching';
 import Highlight from 'react-highlight'
 import Loading from './Loading';
+import ScrollToBottom from 'react-scroll-to-bottom';
 
 const Conversation = ({loading}) => {
   const { data, isLoading, error } = useQuery(
@@ -21,6 +22,8 @@ const Conversation = ({loading}) => {
   }
 console.log(data.conversations,"----------------------------")
   return (
+    <ScrollToBottom className='h-[65vh]'>
+
     <div className="w-full max-w-5xl mx-auto p-4">
       {loading && <Loading array={[1]} />}
       {data.conversations?.length == 0 ? (
@@ -45,6 +48,7 @@ console.log(data.conversations,"----------------------------")
         ))
       )}
     </div>
+        </ScrollToBottom>
   );
 };
 

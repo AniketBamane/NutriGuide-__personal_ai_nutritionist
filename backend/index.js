@@ -14,7 +14,6 @@ app.use(cors({
   methods: ["GET", "POST", "PUT", "DELETE"] // Specify allowed HTTP methods for cross-origin requests
 })); // Enable CORS for cross-origin requests
 app.use(express.json()); // Parse incoming JSON data
-
 app.post('/nutriguide', nutriguideController.handleChat);
 app.get("/get-conversations",nutriguideController.getConversations);
 
