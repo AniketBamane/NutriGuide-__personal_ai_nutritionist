@@ -9,7 +9,7 @@ const app = express();
 const port = process.env.PORT || 3000; // Use environment variable for port
 
 app.use(cors({
-  origin:"http://localhost:5173",
+  origin:"https://funny-monstera-b4a5b2.netlify.app/",
   credentials: true,  // Enable sending cookies over HTTP requests
   methods: ["GET", "POST", "PUT", "DELETE"] // Specify allowed HTTP methods for cross-origin requests
 })); // Enable CORS for cross-origin requests
