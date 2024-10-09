@@ -95,5 +95,3 @@ npm start</code></pre>
   <li>Add history of queries for users.</li>
 </ul>
 
-<h2>License</h2>
-<p>This project is licensed under the MIT License. See the <code>LICENSE</code> file for details.</p>
